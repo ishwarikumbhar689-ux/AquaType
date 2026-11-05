@@ -2,6 +2,8 @@
 
 > **Dive In. Type Fast. Discover More.**
 
+🔗 **Live demo:** [aquatype.netlify.app](https://aquatype.netlify.app)
+
 AquaType is a browser-based typing game with an ocean theme. Type passages to earn XP, unlock seven ocean zones, restore a coral reef, discover creatures, and complete daily expeditions. No account needed to play — progress saves in the browser automatically.
 
 ---
