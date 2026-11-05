@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#04283d">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AquaType – Dive In. Type Fast. Discover More.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Figtree:wght@400;600&family=JetBrains+Mono:wght@400;500&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="sea" aria-hidden="true"></canvas><div id="vg" aria-hidden="true"></div>
+<nav><div class="wrap">
+<a class="logo" href="#top">Aqua<span>Type</span></a>
+<a class="l" href="#play">Play</a><a class="l" href="#explore">Explore</a><a class="l" href="#oceanmap">Map</a><a class="l" href="#progress">Progress</a><a class="l" href="#story">Story</a><a class="l" href="#habitat">Habitat</a><a class="l" href="#journal">Journal</a>
+<button class="tg" id="snd" aria-pressed="false">Sound</button><input id="vol" type="range" min="0" max="1" step=".1" value=".6" aria-label="Sound volume" style="width:64px"><button class="tg" id="foc" aria-pressed="false">Focus</button><button class="tg" id="sbtn">Settings</button><button class="tg" id="calm" aria-pressed="false">Calm motion</button>
+</div></nav>
+
+<main id="top">
+<header class="hero"><div class="wrap">
+<h1>Every word takes you deeper.</h1>
+<p>Type passages to build speed and accuracy, restore a coral reef, and unlock seven ocean zones full of creatures to discover.</p>
+<a class="btn p" href="#play">Start your journey</a><a class="btn s" href="#explore">Explore the ocean</a>
+<div class="facts"><span>Live WPM and accuracy</span><span>15 to 120 second dives</span><span>No account needed</span></div>
+</div></header>
+
+<section id="play"><div class="wrap">
+<h2>Dive in</h2>
+<p class="sub">Click the text and start typing. The timer starts on your first key. Correct streaks send energy through the water.</p>
+<div class="arena">
+<div class="bar">
+<div class="seg" id="dur" role="group" aria-label="Duration"><button data-v="15">15s</button><button data-v="30" aria-pressed="true">30s</button><button data-v="60">60s</button><button data-v="120">120s</button></div>
+<div class="seg" id="dif" role="group" aria-label="Difficulty"><button data-v="easy" aria-pressed="true">Beginner</button><button data-v="mid">Intermediate</button><button data-v="hard">Advanced</button></div>
+<div class="seg" id="mod" role="group" aria-label="Mode"><button data-v="free" aria-pressed="true">Free dive</button><button data-v="prec">Precision</button><button data-v="endless">Endless</button><button data-v="sym">Symbols</button><button data-v="weak">Weak keys</button><button data-v="custom">Custom text</button></div>
+<div class="live"><div><b id="lt">30</b><small>seconds</small></div><div><b id="lw">0</b><small>WPM</small></div><div><b id="la">100%</b><small>accuracy</small></div></div>
+</div>
+<div id="cw" hidden><textarea id="ct" rows="2" maxlength="600" aria-label="Custom text" placeholder="Paste or write the text you want to practice"></textarea><button class="btn s" id="cuse">Use this text</button></div><p class="note" id="mn"></p>
+<div class="gl"><span>Depth <span id="dp">0 m</span></span><span id="zn">Sunlit Lagoon</span></div>
+<div class="gauge"><i id="gf"></i></div>
+<div id="txt" tabindex="0" role="textbox" aria-label="Typing passage"><div class="in" id="in"></div><div id="hint">Click here and start typing</div></div>
+<div id="kb" hidden aria-hidden="true"></div><p class="note" id="fg" hidden></p>
+<input id="hid" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Typing input">
+<div class="stats">
+<div><b id="s1">1</b><small>Level</small></div><div><b id="s2">0</b><small>Total XP</small></div>
+<div><b id="s3">–</b><small>Best WPM (this setup)</small></div>
+<div><b id="s4">1/7</b><small>Zones unlocked</small></div>
+<div><b id="s5">Damaged coral</b><small>Reef stage</small><div class="reef" id="rf"></div></div>
+</div>
+</div>
+<div class="dq" style="margin-top:22px"><div><h3 id="dqn"></h3><span id="dqd"></span></div><div class="st" id="dqs"></div></div>
+</div></section>
+
+<section id="oceanmap"><div class="wrap">
+<h2>Ocean map</h2>
+<p class="sub">Seven zones, each with its own world, difficulty, missions and exclusive theme. Finish every mission in a zone to open the next one. Select a zone to see its details.</p>
+<div class="zhead"><span>🦪 <b id="zpe">0</b> pearls</span><button class="btn s" id="ldb">Start Long Descent</button></div>
+<div class="omap"><svg class="opath" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline id="opl" points=""/></svg><div id="onodes"></div></div>
+<div class="zdet" id="zdet"></div>
+<h3 style="margin:34px 0 14px">Zone badges</h3><div class="cr" id="zb"></div>
+</div></section>
+<section id="progress"><div class="wrap"><h2>Your progress</h2><p class="sub">Charts use your saved dives. Dots are single dives and the dashed line is your average.</p>
+<div class="dq" id="prof" style="margin-bottom:22px"></div><div id="goal" style="margin-bottom:22px"></div>
+<div class="stats"><div><b id="d1">0</b><small>Best WPM</small></div><div><b id="d2">0</b><small>Average WPM</small></div><div><b id="d3">0%</b><small>Average accuracy</small></div><div><b id="d4">0</b><small>Dives completed</small></div><div><b id="d5">0 min</b><small>Practice time</small></div></div>
+<div class="how" style="margin-top:28px"><div><h3>WPM over time</h3><div id="c1"></div></div><div><h3>Accuracy over time</h3><div id="c2"></div></div></div>
+<p class="note" id="wk"></p><h3>Your top dives</h3><ol class="note" id="topl"></ol><h2 style="margin-top:50px">Badges</h2><p class="sub">Each badge shows its exact requirement.</p><div class="cr" id="bd"></div></div></section>
+<section id="story"><div class="wrap"><h2>Station Aurora</h2><p class="sub">The research station went silent. Decode each message by typing it in full with at least 90% accuracy. Each chapter unlocks the next and adds a log to your collection.</p><div id="stl" class="cr"></div></div></section>
+<section id="habitat"><div class="wrap"><h2>Your reef habitat</h2><p class="sub">Place decorations you have unlocked with XP. Select one, then select a square. Select the same decoration on a filled square to clear it. Treasure decorations unlock after 5, 15 and 30 completed dives.</p><div id="pal" class="seg"></div><div id="hg" class="hg"></div><h3 style="margin-top:34px">Typing constellation</h3><p class="note">Every completed dive adds a star.</p><svg id="cn" viewBox="0 0 320 140" role="img" aria-label="Your constellation of completed dives"></svg></div></section>
+<section id="explore"><div class="wrap">
+<h2>Seven zones, one long descent</h2>
+<p class="sub">Earn XP from every dive to sink deeper. Accuracy counts as much as speed, so careful beginners progress too.</p>
+<ol class="rail" id="reg"></ol>
+</div></section>
+
+<section><div class="wrap">
+<h2>How a dive works</h2><p class="sub"></p>
+<div class="how">
+<div><h3>Type</h3><p>Pick a duration and difficulty. Correct characters fill the depth gauge and wrong ones are underlined, never hidden.</p></div>
+<div><h3>Build energy</h3><p>A streak of correct keys makes the sea glow and bubble faster. A mistake resets the streak.</p></div>
+<div><h3>Restore and discover</h3><p>XP grows your reef through five stages and unlocks zones with new creatures for your journal.</p></div>
+</div></div></section>
+
+<section id="journal"><div class="wrap">
+<h2>Discovery journal</h2>
+<p class="sub">Each zone you reach reveals a creature. Fiction aside, the facts below are real.</p>
+<div class="cr" id="cr"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><a href="#top">Back to surface</a><a href="#play">Play</a><p>AquaType keeps your progress on this device only. Reef restoration here is a game and does not restore real reefs. Accounts, leaderboards and multiplayer are planned for later releases.</p></div></footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="zc"><div style="position:relative;overflow:hidden;text-align:center;padding:10px"><div id="zcf" aria-hidden="true"></div><div id="zci" style="font-size:4rem;animation:bob 2s ease-in-out infinite">🎉</div><h2 id="zct"></h2><p id="zcs" class="msg"></p><button class="btn p" onclick="this.closest('dialog').close()">Continue</button></div></dialog>
+<dialog id="ld"><div class="ldv"><h2>Long Descent</h2><p class="note">Type each word to sink deeper. 🫧 words refill oxygen. Hazard words must be finished before their timer ends. Wrong keys cost oxygen.</p>
+<div class="gl"><span>Depth <b id="ldd">0</b> m</span><span id="ldz"></span></div><div class="gauge"><i id="ldo" style="width:100%"></i></div>
+<div class="ldw" id="ldw" aria-live="off"></div><div class="gauge"><i id="ldh" style="width:0"></i></div><p class="note" id="ldk"></p><p class="msg" id="ldr"></p>
+<input id="ldin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Long Descent typing input">
+<button class="btn p" id="ldgo">Start</button><button class="btn s" id="ldx">Close</button></div></dialog>
+<dialog id="set"><h2>Settings</h2>
+<label>Theme <select id="s_th"><option value="deep">Deep Blue</option><option value="coral">Coral Dawn (level 2)</option><option value="kelp">Kelp Forest (level 3)</option><option value="trench">Midnight Trench (level 4)</option></select></label>
+<label>Cursor <select id="s_cu"><option value="line">Line</option><option value="block">Block</option><option value="fish">Fish</option></select></label>
+<label>Text size <input id="s_sz" type="range" min="1" max="2" step=".1"></label>
+<label>Dyslexia-friendly font <input id="s_dy" type="checkbox"></label><label>Depth pressure effect <input id="s_pr" type="checkbox"></label><label>Finger guide keyboard <input id="s_kb" type="checkbox"></label>
+<label>Name <input id="s_nm" maxlength="20"></label><label>Avatar <select id="s_av"></select></label>
+<label>Goal WPM <input id="s_gw" type="number" min="10" max="200"></label><label>Goal accuracy % <input id="s_ga" type="number" min="50" max="100"></label>
+<p><button class="btn s" id="s_ex">Export backup</button><label class="btn s" style="margin:0 0 10px">Import backup<input id="s_im" type="file" accept="application/json" hidden></label></p><p class="note" id="s_msg"></p>
+<button class="btn p" id="s_ok">Done</button></dialog>
+<dialog id="keys"><h2>Shortcuts</h2><p class="note">Press ? to open this panel when not typing.</p><p>Esc while typing: restart</p><p>R: restart</p><p>F: focus mode</p><p>S: settings</p><p>Tab then Enter: press a button</p><button class="btn p" onclick="this.closest('dialog').close()">Close</button></dialog>
+<dialog id="res"><h2>Dive complete</h2><p class="msg" id="rm"></p>
+<div class="rg"><div><b id="r1"></b><small>WPM</small></div><div><b id="r2"></b><small>accuracy</small></div><div><b id="r3"></b><small>mistakes</small></div><div><b id="r4"></b><small>XP earned</small></div></div>
+<p id="rn" class="note"></p><p id="cmp" class="note"></p><p id="ep" class="note"></p>
+<button class="btn p" id="again">Dive again</button><button class="btn s" id="close">Close</button></dialog>
+
+<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+</body>
+</html>

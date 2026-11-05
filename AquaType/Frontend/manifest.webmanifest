@@ -1,0 +1,1 @@
+{"name": "AquaType", "short_name": "AquaType", "start_url": "./index.html", "display": "standalone", "background_color": "#04283d", "theme_color": "#04283d", "icons": [{"src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml"}]}
